@@ -19,3 +19,6 @@ Route::get('/', function () {
 
 Route::get('change/{locale}/locale',[App\Http\Controllers\PostController::class,'changeLocale'])->name('change.locale');
 Route::resource('posts', App\Http\Controllers\PostController::class);
+Route::get('{slug}',[App\Http\Controllers\PostController::class,'postdetail'])->name('post.detail');
+
+

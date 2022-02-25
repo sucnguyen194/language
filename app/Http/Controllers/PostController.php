@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
-
+use DB;
 class PostController extends Controller
 {
     /**
@@ -42,16 +42,14 @@ class PostController extends Controller
         $post->save();
 
         $post->translations()->createMany($request->translation);
-
         session()->put('locale', 'vi');
-
         return redirect()->route('posts.index');
     }
 
     public function changeLocale($locale){
         session()->put('locale', $locale);
-
-        return redirect()->route('posts.index');
+        
+        return redirect()->back();
     }
 
 
@@ -98,5 +96,13 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function postdetail($slug){
+        // $posts = Post::with('translation')->where('slug',$slug)->firstorfail();
+        // $posts = Post::with('translation')->firstorfail();
+        $post = DB::table('translations')->where('slug',$slug)->First();
+        // dd($post);
+        return view('post.detail',compact('post'));
     }
 }
