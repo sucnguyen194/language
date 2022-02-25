@@ -13,6 +13,7 @@
 </head>
 <body>
     <div class="w-75 m-auto">
+        <a class="btn btn-primary" href="{{url('/')}}">Trang chủ</a>
         <a href="{{route('change.locale','vi')}}" class="btn btn-success">VietNamese</a>
         <a href="{{route('change.locale','en')}}" class="btn btn-info">English</a>
 

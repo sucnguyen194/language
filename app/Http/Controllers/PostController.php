@@ -48,8 +48,16 @@ class PostController extends Controller
 
     public function changeLocale($locale){
         session()->put('locale', $locale);
-        
-        return redirect()->back();
+        $slug = str_replace(url(''), '', url()->previous());
+        $data = DB::table('translations')->where('slug',ltrim($slug, "/"))->first();
+        if($data !== null){
+              $newdata = DB::table('translations')->where('post_id',$data->post_id)->where('locale',$locale)->first();
+      
+            return redirect("/$newdata->slug");
+        }
+        else{
+            return redirect()->back();
+        }    
     }
 
 
